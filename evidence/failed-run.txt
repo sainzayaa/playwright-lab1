@@ -1,0 +1,50 @@
+
+Running 3 tests using 3 workers
+
+[1/3] [chromium] › tests/mytest.spec.ts:44:1 › нэвтэрсний дараа бараа сагслах
+[2/3] [chromium] › tests/mytest.spec.ts:30:1 › амжилтгүй нэвтрэх: буруу нууц үг
+[3/3] [chromium] › tests/mytest.spec.ts:18:1 › амжилттай нэвтрэх
+  1) [chromium] › tests/mytest.spec.ts:18:1 › амжилттай нэвтрэх ────────────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByTestId('title')
+    Expected: "Productz"
+    Received: "Products"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" getByTestId('title') with timeout 5000ms
+      - waiting for getByTestId('title')
+        14 × locator resolved to <span class="title" data-test="title">Products</span>
+           - unexpected value "Products"
+
+
+      21 |   // Нэвтэрснийг URL болон хуудасны гарчгаар шалгана
+      22 |   await expect(page).toHaveURL(/inventory\.html/);
+    > 23 |   await expect(page.getByTestId('title')).toHaveText('Productz');
+         |                                           ^
+      24 |
+      25 |   // Тестийг logout-оор төгсгөж, нэвтрэх хуудас руу буцсаныг шалгана
+      26 |   await logout(page);
+        at /Users/tselmuunzaya/labs/playwright-lab1/tests/mytest.spec.ts:23:43
+
+    Error Context: test-results/mytest-амжилттай-нэвтрэх-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/mytest-амжилттай-нэвтрэх-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/mytest-амжилттай-нэвтрэх-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [chromium] › tests/mytest.spec.ts:18:1 › амжилттай нэвтрэх ─────────────────────────────────────
+  2 passed (7.2s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m
