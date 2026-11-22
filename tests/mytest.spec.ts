@@ -40,3 +40,21 @@ test('амжилтгүй нэвтрэх: буруу нууц үг', async ({ pag
 
   // Нэвтрээгүй тул logout хийх шаардлагагүй: тест дангаараа дуусна (test isolation)
 });
+
+test('нэвтэрсний дараа бараа сагслах', async ({ page }) => {
+  await login(page, 'standard_user', 'secret_sauce');
+
+  // Бараа нэмэхээс өмнө сагсны тоолуур харагдахгүй
+  await expect(page.getByTestId('shopping-cart-badge')).toHaveCount(0);
+
+  // "Sauce Labs Backpack"-ийн "Add to cart" товчийг дарна
+  await page.getByTestId('add-to-cart-sauce-labs-backpack').click();
+
+  // Сагсны тоолуур 1 болж, товч "Remove" болж өөрчлөгдсөнийг шалгана
+  await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');
+  await expect(page.getByRole('button', { name: 'Remove' })).toBeVisible();
+
+  // Тестийг logout-оор зөв төгсгөнө
+  await logout(page);
+  await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
+});
